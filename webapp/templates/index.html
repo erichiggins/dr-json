@@ -1,0 +1,28 @@
+{% extends "_layout.html" %}
+
+{% block content %}
+  <p>Print the structure of a JSON file in a readable format.</p>
+  <form action="/render" method="get" enctype="multipart/form-data" accept-charset="UTF-8">
+    <label>JSON URL:</label> <input name="url" value="{{url}}" style="width:450px;">
+    <input type="submit" value="Go"><br>
+    <!--label>File:</label> <input name="content" type="upload"><br-->
+  <label><input name="full" value="1" type="checkbox"{% if full %} checked{% endif %}>
+    Pretty-print full JSON file</label><br>
+  <label><input name="ex" value="1" type="checkbox"{% if ex %} checked{% endif %}>
+    Show example values</label><br>
+  <label><input name="dark" value="1" type="checkbox"{% if dark %} checked{% endif %}>
+    Go dark</label><br>
+  </form>
+  <p><strong>Wish you could upload a file instead?</strong> Consider using the
+  <a href="http://code.google.com/p/dr-json/source/browse/#hg">command-line version</a>.</p>
+  <p><strong>dr-json</strong> is Open Source Software released under the Apache License 2.0</p>
+  <p><a href="http://code.google.com/p/dr-json/">dr-json Project information</a></p>
+
+  <p><em>This URL will be cached for 1 day.</em>
+    <a href="{{url}}">{{url}}</a></p>
+
+{% if structure %}
+  <pre>{{structure}}</pre>
+{% endif %}
+
+{% endblock %}

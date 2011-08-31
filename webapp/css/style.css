@@ -1,0 +1,13 @@
+html {
+  font-family: arial, sans-serif;
+  font-size: 83%;
+}
+
+pre {
+  font-size: 1.3em;
+}
+
+.dark {
+  background-color: #000;
+  color: #aaa;
+}

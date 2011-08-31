@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en"{% if dark %} class="dark"{% endif %}>
+<head>
+<meta charset="utf-8">
+<title>DrJSON</title>
+<link href="/css/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+{% if readonly %}<div class="butter">Maintenance mode! Read only!</div>{% endif %}
+  <h1><a href="/">DrJSON</a></h1>
+{% block content %}{% endblock %}
+</body>
+</html>
