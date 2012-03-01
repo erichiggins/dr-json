@@ -14,10 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""One-line documentation for format_printer module.
-
-A detailed description of format_printer.
-"""
+"""Print the structure of a JSON file in a human-readable format."""
 
 __author__ = 'erichiggins@google.com (Eric Higgins)'
 
@@ -73,6 +70,21 @@ def CopyStructure(obj, example=False):
   return mirror
 
 
+def Process(data, example=False):
+  """Process the JSON data structure and return the desired output.
+
+  Args:
+    obj: Dictionary object to copy the structure of.
+    example: If True, copies the first value from the object structure.
+  Returns:
+    A minimal dictionary object copying the structure of the original.
+  """
+  if isinstance(data, list):
+    return [CopyStructure(x, example) for x in data]
+  elif isinstance(data, dict):
+    return CopyStructure(data, example)
+
+
 def main():
   options, args = FLAGS.parse_args()
   if not args:
@@ -85,7 +97,7 @@ def main():
   else:
     data = json.load(fp)
     if not options.full:
-      data = CopyStructure(data, options.example)
+      data = Process(data, options.example)
     print json.dumps(data, indent=2)
 
 

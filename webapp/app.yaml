@@ -13,7 +13,7 @@
 # limitations under the License.
 
 application: dr-json
-version: 1
+version: v1x1
 runtime: python
 api_version: 1
 
@@ -26,7 +26,6 @@ handlers:
   script: views.py
 
 builtins:
-- admin_redirect: on
 - datastore_admin: on
 - deferred: on
 - remote_api: on

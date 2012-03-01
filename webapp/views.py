@@ -80,7 +80,7 @@ class DrJsonView(webapp.RequestHandler):
     except ValueError:
       return self.error(500)
     if not full:  # Print just the structure.
-      structure = drjson.CopyStructure(structure, example=example)
+      structure = drjson.Process(structure, example=example)
     template_values = {
         'url': url,
         'dark': dark,
