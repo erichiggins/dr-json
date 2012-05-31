@@ -31,6 +31,7 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp import template
 from google.appengine.ext.webapp import util
 import drjson
+import logging
 
 
 class IndexView(webapp.RequestHandler):
@@ -74,10 +75,14 @@ class DrJsonView(webapp.RequestHandler):
       if result.status_code == 200:
         content = result.content
         memcache.set(url, content, time=appengine_config.URL_CACHE_TIME)
+      else:
+        logging.error('%s returned %s', url, result.status_code)
+        return self.error(500)
     # Load the JSON.
     try:
       structure = json.loads(content)
-    except ValueError:
+    except TypeError, ValueError:
+      logging.exception('Could not load JSON content for %s', url)
       return self.error(500)
     if not full:  # Print just the structure.
       structure = drjson.Process(structure, example=example)
